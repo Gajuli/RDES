@@ -178,10 +178,16 @@ def algoritm64(text,key_mas):
     a=initial[0:32]
     b=initial[32:64]
     iter=1
+    #tmp_key=key_mas[0]
     while iter<=15:
+        tmp_key=key_mas[iter-1]
         a1=a
         b1=b
         a,b=iround(a1,b1,key_mas[iter-1])
+        if (tmp_key[0]=='1') and (iter>1):
+            a2=a
+            a=b
+            b=a2
         iter+=1
     a1=a
     b1=b
@@ -204,9 +210,16 @@ def un_algoritm64(text,key_mas):
     a=initial[0:32]
     b=initial[32:64]
     iter=1
+    #tmp_key=key_mas[0]
     while iter<=15:
+        tmp_key=key_mas[16-iter]
         a1=a
         b1=b
+        if (tmp_key[0]=='1') and (iter>1):
+            a2=a1
+            a1=b1
+            b1=a2
+
         a,b=iround(a1,b1,key_mas[16-iter])
         iter+=1
     a1=a
